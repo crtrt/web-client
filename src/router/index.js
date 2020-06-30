@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // import LoginIn from '@/pages/LoginIn'
-// import SignUp from '@/pages/SignUp'
+
 import Index from '@/pages/Index'
-
-
+import Home from '@/pages/Home'
+import OldManage from '@/pages/OldManage'
+import Setting from '@/pages/Setting'
 Vue.use(Router)
 
 export default new Router({
@@ -17,27 +18,39 @@ export default new Router({
       path: '/404',
       component: resolve => require(['../pages/404.vue'], resolve)
     },
-    // {
-    //   path: '/login-in',
-    //   name: 'login-in',
-    //   component: LoginIn
-    // },
-    // {
-    //   path: '/sign-up',
-    //   name: 'sign-up',
-    //   component: SignUp
-    // },
+
     {
       path: '/',
       name: 'Index',
-      component: Index
+      component: Index,
+      meta: {
+        keepAlive: false
+      }
     },
-    // {
-    //   path: '/song-list',
-    //   name: 'song-list',
-    //   component: SongList
-    // },
-    //
+    {
+      path: '/Home',
+      name: 'Home',
+      component: Home,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/OldManage',
+      name: 'OldManage',
+      component: OldManage,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/Setting',
+      name: 'Setting',
+      component: Setting,
+      meta: {
+        keepAlive: true
+      }
+    },
     // {
     //   path: '/singer-album/:id',
     //   name: 'singer-album',

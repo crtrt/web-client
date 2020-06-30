@@ -172,70 +172,65 @@
 
         methods: {
             async submitForm (loginForm) {
-                this.$refs[loginForm].validate((valid) => {
-                    if (!valid) {
-                        return
-                    }
-                    this.loadingLogin = true
-                })
-                let result = await this.$store.dispatch('login', {
-                    userid: this.loginForm.userName,
-                    password: this.loginForm.pwd
-                })
-                if (result.code) {
-                    if (result.code === 100310) {
-                        this.loadingLogin = false
-                        alert('密码／用户名不能为空')
-                        console.log('密码／用户名不能为空')
-                        return
-                    } else if (result.code === 300101) {
-                        this.loadingLogin = false
-                        alert('密码不正确')
-                        console.log('密码不正确')
-                        return
-                    } else if (result.code === 300100) {
-                        console.log(result)
-                        this.loadingLogin = false
-                        alert('用户名不存在！')
-                        return
-                    } else if(result.code === 300104){
-                        console.log(result)
-                        this.loadingLogin = false
-                        alert('账户无效！')
-                        return
-                    } else if(result.code === 300108){
-                        console.log(result)
-                        this.loadingLogin = false
-                        alert('此通道不允许非管理员账号登录！')
-                        return
-                    } else if(result.code === 300109){
-                        console.log(result)
-                        this.loadingLogin = false
-                        alert('不允许此账号类型登录系统！')
-                        return
-                    } else {
-                        console.log(result)
-                        return
-                    }
-                }
-                if (result.data.detail.identity.length>0){
-                    this.loadingLogin = false
-                    this.identityList = result.data.detail.identity
-                    this.getSettingCode()
 
-                }
+                this.$router.push({path: '/Home'})
+                this.$router.go(0)
+                console.log(loginForm)
+                // this.$refs[loginForm].validate((valid) => {
+                //     if (!valid) {
+                //         return
+                //     }
+                //     this.loadingLogin = true
+                // })
+                // let result = await this.$store.dispatch('login', {
+                //     userid: this.loginForm.userName,
+                //     password: this.loginForm.pwd
+                // })
+                // if (result.code) {
+                //     if (result.code === 100310) {
+                //         this.loadingLogin = false
+                //         alert('密码／用户名不能为空')
+                //         console.log('密码／用户名不能为空')
+                //         return
+                //     } else if (result.code === 300101) {
+                //         this.loadingLogin = false
+                //         alert('密码不正确')
+                //         console.log('密码不正确')
+                //         return
+                //     } else if (result.code === 300100) {
+                //         console.log(result)
+                //         this.loadingLogin = false
+                //         alert('用户名不存在！')
+                //         return
+                //     } else if(result.code === 300104){
+                //         console.log(result)
+                //         this.loadingLogin = false
+                //         alert('账户无效！')
+                //         return
+                //     } else if(result.code === 300108){
+                //         console.log(result)
+                //         this.loadingLogin = false
+                //         alert('此通道不允许非管理员账号登录！')
+                //         return
+                //     } else if(result.code === 300109){
+                //         console.log(result)
+                //         this.loadingLogin = false
+                //         alert('不允许此账号类型登录系统！')
+                //         return
+                //     } else {
+                //         console.log(result)
+                //         return
+                //     }
+                // }
+                // if (result.data.detail.identity.length>0){
+                //     this.loadingLogin = false
+                //     this.identityList = result.data.detail.identity
+                //     this.getSettingCode()
+                //
+                // }
             },
 
-            userLogin(){
 
-            },
-
-
-
-            tokenLogin(){
-
-
-            },
 
             registerform(registerForm){
                 console.log(registerForm)
