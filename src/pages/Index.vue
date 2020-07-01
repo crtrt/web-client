@@ -21,7 +21,9 @@
                         <el-input v-model="loginForm.pwd" placeholder="密码" type="password" @keyup.enter.native="submitForm('loginForm')"></el-input>
                     </el-form-item>
                     <el-form-item style="margin-top: 20px">
-                        <el-button type="primary" @click="submitForm('loginForm')" class="submitBtn" round >登录</el-button>
+                        <el-button type="primary" @click="submitForm(loginForm)" class="submitBtn" round >登录</el-button>
+
+                        <el-button type="primary" @click="test()" class="submitBtn" round >测试</el-button>
                     </el-form-item>
                 </el-form>
                 <el-button type="text" style="display:block;margin:0 auto;margin-top: -10px" @click="dialogRegister=true">注册</el-button>
@@ -66,11 +68,7 @@
 
 <script>
 
-    // import Cookies from 'js-cookie';
-    // import Pro from '../api/API_PRO'
-    // import API from '../api'
-    // import CliFooter from "../components/base/cliFooter";
-
+    import { loginIn } from '../api/index'
     export default {
         components: {
 
@@ -88,7 +86,6 @@
             };
             return {
                 isInit: false,
-
                 loadingLogin: false,
                 labelPosition: 'left',
                 loginForm: {
@@ -122,7 +119,7 @@
                 },
                 registerRule: {
                     jobNumber: [
-                        { required: true,  message: '请输入教职工号', trigger: 'blur' }
+                        { required: true,  message: '请输入账号', trigger: 'blur' }
                     ],
                     password: [
                         { required: true, message: '请输入密码', trigger: 'blur' }
@@ -135,15 +132,7 @@
                     name:[{
                         required: true, message: '请输入姓名', trigger: 'blur'
                     }],
-                    unit:[{
-                        required: true, message: '请选择单位', trigger: 'blur'
-                    }],
-                    position:[{
-                        required: true, message: '请选择职务', trigger: 'blur'
-                    }],
-                    job:[{
-                        required: true, message: '请选择职称', trigger: 'blur'
-                    }],
+
                     email:[{
                         required: true, message: '请输入邮箱', trigger: 'blur'
                     }],
@@ -151,148 +140,67 @@
                         required: true, message: '请输入联系电话', trigger: 'blur'
                     }],
                 },
-
-                unitList:[],
-                identityList:[],
                 isShow : false,
-                other: '',
-                universitiyList: [],
-
-
             }
         },
 
         mounted() {
             // 先登录
             this.isInit = true;
-            this.misLogin();
-            this.getUniversity();
-            this.tokenLogin();
+
         },
 
         methods: {
-            async submitForm (loginForm) {
-
-                this.$router.push({path: '/Home'})
-                this.$router.go(0)
-                console.log(loginForm)
-                // this.$refs[loginForm].validate((valid) => {
-                //     if (!valid) {
-                //         return
-                //     }
-                //     this.loadingLogin = true
-                // })
-                // let result = await this.$store.dispatch('login', {
-                //     userid: this.loginForm.userName,
-                //     password: this.loginForm.pwd
-                // })
-                // if (result.code) {
-                //     if (result.code === 100310) {
-                //         this.loadingLogin = false
-                //         alert('密码／用户名不能为空')
-                //         console.log('密码／用户名不能为空')
-                //         return
-                //     } else if (result.code === 300101) {
-                //         this.loadingLogin = false
-                //         alert('密码不正确')
-                //         console.log('密码不正确')
-                //         return
-                //     } else if (result.code === 300100) {
-                //         console.log(result)
-                //         this.loadingLogin = false
-                //         alert('用户名不存在！')
-                //         return
-                //     } else if(result.code === 300104){
-                //         console.log(result)
-                //         this.loadingLogin = false
-                //         alert('账户无效！')
-                //         return
-                //     } else if(result.code === 300108){
-                //         console.log(result)
-                //         this.loadingLogin = false
-                //         alert('此通道不允许非管理员账号登录！')
-                //         return
-                //     } else if(result.code === 300109){
-                //         console.log(result)
-                //         this.loadingLogin = false
-                //         alert('不允许此账号类型登录系统！')
-                //         return
-                //     } else {
-                //         console.log(result)
-                //         return
-                //     }
-                // }
-                // if (result.data.detail.identity.length>0){
-                //     this.loadingLogin = false
-                //     this.identityList = result.data.detail.identity
-                //     this.getSettingCode()
-                //
-                // }
+            test(){
+                this.$router.push({path: '/Home'});
             },
+            submitForm (loginForm) {
+                console.log("loginForm")
+                console.log(loginForm.userName)
+                console.log(loginForm.pwd)
 
+                let _this = this
+                let params = new URLSearchParams()
+                params.append('name', loginForm.userName)
+                params.append('password', loginForm.pwd)
+
+                loginIn(params)
+                    .then(res => {
+                        console.log("res")
+                        console.log(res)
+
+                        if (res.code === 1) {
+                            _this.$message({
+                                message: '登录成功',
+                                type: 'success'
+                            })
+
+                            _this.setUserMsg()
+
+                            setTimeout(function () {
+                                this.$router.push({path: '/Home'})
+                                this.$router.go(0)
+                            }, 2000)
+                        } else {
+                            _this.$message.error('用户名或密码错误')
+                        }
+                    }).catch(msg => {
+                    alert(msg)
+                });
+
+            },
+            setUserMsg (item) {
+                this.$store.commit('setUserId', item.id)
+                this.$store.commit('setUsername', item.username)
+                this.$store.commit('setAvator', item.avator)
+            },
 
 
             registerform(registerForm){
                 console.log(registerForm)
             },
 
-            /**
-             * 请求编码
-             * */
-            getSettingCode(){
-                // let data = {
-                //     token: Cookies.get('token'),
-                // }
-                // API.settingCode(data).then(res => {
-                //     if(this.projectType === 2){
-                //         Cookies.set('college', [])
-                //         Cookies.set('teacher_position', [])
-                //     } else {
-                //         Cookies.set('college', res.college)
-                //         Cookies.set('teacher_position', res.teacher_position)
-                //     }
-                //     Cookies.set('counsel_category', res.counsel_category)
-                //
-                //     console.log(this.identityList.length)
-                //     let roleType = this.identityList.length === 0 ? 3 : this.identityList[0]
-                //
-                //     if (roleType === 1) {
-                //         this.$router.push({path: `/main/school_admin`})
-                //     } else if (roleType === 2) {
-                //         this.$router.push({path: `/main/admin`})
-                //     } else {
-                //         this.$router.push({path: `/main/counseller`})
-                //     }
-                //     return res
-                // }).catch(msg => {
-                //     console.log(msg)
-                //     alert('编码请求错误，请稍后再试!')
-                // })
-            },
 
-            /**
-             * 请求编码
-             * */
-            getUniversity(){
-                // let data = {
-                // }
-                // API.settingCode(data).then(res => {
-                //
-                //     this.universitiyList = res.university
-                //
-                // }).catch(msg => {
-                //     console.log(msg)
-                //     alert('编码请求错误，请稍后再试!')
-                // })
-            },
-
-            clickSelect(){
-                console.log('register')
-                if(this.registerForm.unit === '其他')
-                    this.isShow = true;
-                else
-                    this.isShow = false;
-            }
         }
     }
 </script>

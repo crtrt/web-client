@@ -1,11 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import LoginIn from '@/pages/LoginIn'
+
 
 import Index from '@/pages/Index'
 import Home from '@/pages/Home'
 import OldManage from '@/pages/OldManage'
 import Setting from '@/pages/Setting'
+import Staff from '@/pages/Staff'
+import Volunteer from '@/pages/Volunteer'
+
+
 Vue.use(Router)
 
 export default new Router({
@@ -47,6 +51,23 @@ export default new Router({
       path: '/Setting',
       name: 'Setting',
       component: Setting,
+      meta: {
+        keepAlive: true
+      }
+    },
+
+    {
+      path: '/Staff',
+      name: 'Staff',
+      component: Staff,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/Volunteer',
+      name: 'Volunteer',
+      component: Volunteer,
       meta: {
         keepAlive: true
       }
