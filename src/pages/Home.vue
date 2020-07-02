@@ -13,12 +13,26 @@
 
 <script>
    import Swiper from '../components/Swiper'
+   import {mapGetters} from "vuex";
     export default {
         name: "Home",
        components: {
           Swiper,
 
        },
+       computed: {
+          ...mapGetters([
+             'userId',
+          ])
+       },
+       mounted() {
+          // 先登录
+          console.log("Userid:"+this.userId)
+
+
+
+       },
+
     }
 </script>
 

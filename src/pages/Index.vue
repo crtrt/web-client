@@ -36,8 +36,8 @@
                 title="注册"
                 :visible.sync="dialogRegister">
             <el-form :model="registerForm" :rules="registerRule" ref="registerForm" label-width="80px" >
-                <el-form-item label="用户名" prop="jobNumber" class="login-item">
-                    <el-input v-model="registerForm.jobNumber"  placeholder="请输入用户名" @keyup.enter.native="registerform('registerForm')"></el-input>
+                <el-form-item label="用户名" prop="name" class="login-item">
+                    <el-input v-model="registerForm.name"  placeholder="请输入用户名" @keyup.enter.native="registerform('registerForm')"></el-input>
                 </el-form-item>
                 <el-form-item label="密码" prop="password" >
                     <el-input v-model="registerForm.password" placeholder="请输入您的账号密码" type="password" @keyup.enter.native="registerform('registerForm')"></el-input>
@@ -45,19 +45,22 @@
                 <el-form-item label="确认密码" prop="passwordConfirm" >
                     <el-input v-model="registerForm.passwordConfirm" placeholder="请再次输入密码确认" type="password" @keyup.enter.native="registerform('registerForm')"></el-input>
                 </el-form-item>
-                <el-form-item label="姓名" prop="name" class="login-item" >
-                    <el-input v-model="registerForm.name" placeholder="请输入您的姓名" @keyup.enter.native="registerform('registerForm')"></el-input>
+                <el-form-item label="真实姓名" prop="realname" class="login-item" >
+                    <el-input v-model="registerForm.realname" placeholder="请输入您的真实姓名" @keyup.enter.native="registerform('registerForm')"></el-input>
                 </el-form-item>
                 <el-form-item label="邮箱" prop="email" >
-                    <el-input v-model="registerForm.email" placeholder="邮箱作为找回密码的唯一途径，请输入常用邮箱，便于密码找回"  @keyup.enter.native="registerform('registerForm')"></el-input>
+                    <el-input v-model="registerForm.email" placeholder="请输入您的邮箱"  @keyup.enter.native="registerform('registerForm')"></el-input>
                 </el-form-item>
-                <el-form-item label="联系电话" prop="phone" >
-                    <el-input v-model="registerForm.phone" placeholder="请输入您的联系电话"  @keyup.enter.native="registerform('registerForm')"></el-input>
+                <el-form-item label="固定电话" prop="phone" >
+                    <el-input v-model="registerForm.phone" placeholder="请输入您的固定电话"  @keyup.enter.native="registerform('registerForm')"></el-input>
+                </el-form-item>
+                <el-form-item label="联系电话" prop="mobile" >
+                    <el-input v-model="registerForm.mobile" placeholder="请输入您的联系电话"  @keyup.enter.native="registerform('registerForm')"></el-input>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogRegister = false">取 消</el-button>
-                <el-button type="primary" @click="registerform('registerForm')">注 册</el-button>
+                <el-button type="primary" @click="register('registerForm')">注 册</el-button>
              </span>
         </el-dialog>
 
@@ -68,7 +71,8 @@
 
 <script>
 
-    import { loginIn } from '../api/index'
+    import { loginIn,SignUp } from '../api/index'
+
     export default {
         components: {
 
@@ -106,20 +110,18 @@
 
                 dialogRegister: false,
                 registerForm:{
-                    jobNumber: '',
+                    name: '',
                     password: '',
                     passwordConfirm: '',
-                    name: '',
-                    unit: '',
+                    realname: '',
+                    sex: '',
                     email: '',
                     phone: '',
-                    phone2: '',
-                    position:'',
-                    job:'',
+                    mobile:'',
                 },
                 registerRule: {
-                    jobNumber: [
-                        { required: true,  message: '请输入账号', trigger: 'blur' }
+                    name: [
+                        { required: true,  message: '请输入用户名', trigger: 'blur' }
                     ],
                     password: [
                         { required: true, message: '请输入密码', trigger: 'blur' }
@@ -129,14 +131,19 @@
                         required: true, message: '请确认密码', trigger: 'blur'
                     },
                         { validator: validatePass2, trigger: 'blur' }],
-                    name:[{
-                        required: true, message: '请输入姓名', trigger: 'blur'
+                    realname:[{
+                        required: true, message: '请输入真实姓名', trigger: 'blur'
                     }],
-
+                    sex:[{
+                        required: true, message: '请输入性别', trigger: 'blur'
+                    }],
                     email:[{
                         required: true, message: '请输入邮箱', trigger: 'blur'
                     }],
                     phone:[{
+                        required: true, message: '请输入固定电话', trigger: 'blur'
+                    }],
+                    mobile:[{
                         required: true, message: '请输入联系电话', trigger: 'blur'
                     }],
                 },
@@ -174,30 +181,56 @@
                                 message: '登录成功',
                                 type: 'success'
                             })
-
-                            _this.setUserMsg()
-
+                            _this.setUserMsg(res.id,loginForm.userName)
                             setTimeout(function () {
-                                this.$router.push({path: '/Home'})
-                                this.$router.go(0)
+                                _this.$router.push({path: '/Home'})
+                                _this.$router.go(0)
                             }, 2000)
                         } else {
                             _this.$message.error('用户名或密码错误')
                         }
                     }).catch(msg => {
-                    alert(msg)
+                    console.log("msg")
+                    console.log(msg)
+                       alert(msg)
                 });
 
             },
-            setUserMsg (item) {
-                this.$store.commit('setUserId', item.id)
-                this.$store.commit('setUsername', item.username)
-                this.$store.commit('setAvator', item.avator)
+            setUserMsg (id,name) {
+                this.$store.commit('setUserId', id)
+                this.$store.commit('setUsername',name )
             },
 
 
-            registerform(registerForm){
+            register(registerForm){
                 console.log(registerForm)
+                 let _this = this
+                 let params = new URLSearchParams()
+                 params.append('name', this.registerForm.name)
+                 params.append('password', this.registerForm.password)
+                 params.append('realname', this.registerForm.realname)
+                 params.append('sex', this.registerForm.sex)
+                 params.append('email', this.registerForm.email)
+                 params.append('phone', this.registerForm.phone)
+                 params.append('mobile', this.registerForm.mobile)
+                 // params.append('avator', '/img/user.jpg')
+                 SignUp(params)
+                   .then(res => {
+                     console.log(res)
+                     if (res.code === 1) {
+                         _this.$message.success('注册成功')
+
+                       setTimeout(function () {
+                         _this.dialogRegister=false
+                       }, 2000)
+                     } else {
+                         _this.$message.error('注册失败')
+                     }
+                   })
+                   .catch(err => {
+                     console.log(err)
+                   })
+
             },
 
 

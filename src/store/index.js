@@ -9,7 +9,7 @@ const store = new Vuex.Store({
   state:{
     userId: '',
     username: '',
-    avator: '',
+    // avator: '',
   },
   getters: {
     userId: state => {
@@ -26,13 +26,13 @@ const store = new Vuex.Store({
       }
       return username
     },
-    avator: state => {
-      let avator = state.avator
-      if (!avator) {
-        avator = JSON.parse(window.localStorage.getItem('avator') || null)
-      }
-      return avator
-    }
+    // avator: state => {
+    //   let avator = state.avator
+    //   if (!avator) {
+    //     avator = JSON.parse(window.localStorage.getItem('avator') || null)
+    //   }
+    //   return avator
+    // }
   },
 
 
@@ -45,10 +45,10 @@ const store = new Vuex.Store({
       state.username = username
       window.localStorage.setItem('username', JSON.stringify(username))
     },
-    setAvator: (state, avator) => {
-      state.avator = avator
-      window.localStorage.setItem('avator', JSON.stringify(avator))
-    }
+    // setAvator: (state, avator) => {
+    //   state.avator = avator
+    //   window.localStorage.setItem('avator', JSON.stringify(avator))
+    // }
   },
 
 
