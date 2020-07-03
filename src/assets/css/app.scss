@@ -3,6 +3,23 @@
 
 #app {
   @include layout(flex-start, stretch, column);
+
+  .body{
+    position: fixed;
+    top:70px;
+    width: 100%;
+    min-height: calc(100% - 70px - 1rem);
+    padding: 1.5rem 20px 10rem;
+    margin-bottom: 5rem;
+    background-color: #f4f7fc;
+    height: 80%;
+    overflow-y: auto;
+    box-sizing:border-box;
+    animation: upShow 0.5s;
+    -moz-animation: upShow 0.5s;	/* Firefox */
+    -webkit-animation: upShow 0.5s;	/* Safari 和 Chrome */
+    -o-animation: upShow 0.5s;	/* Opera */
+  }
 }
 
 .content {

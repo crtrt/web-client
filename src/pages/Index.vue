@@ -203,16 +203,15 @@
 
 
             register(registerForm){
-                console.log(registerForm)
                  let _this = this
                  let params = new URLSearchParams()
-                 params.append('name', this.registerForm.name)
-                 params.append('password', this.registerForm.password)
-                 params.append('realname', this.registerForm.realname)
-                 params.append('sex', this.registerForm.sex)
-                 params.append('email', this.registerForm.email)
-                 params.append('phone', this.registerForm.phone)
-                 params.append('mobile', this.registerForm.mobile)
+                 params.append('name', registerForm.name)
+                 params.append('password', registerForm.password)
+                 params.append('realname', registerForm.realname)
+                 params.append('sex', registerForm.sex)
+                 params.append('email', registerForm.email)
+                 params.append('phone', registerForm.phone)
+                 params.append('mobile', registerForm.mobile)
                  // params.append('avator', '/img/user.jpg')
                  SignUp(params)
                    .then(res => {

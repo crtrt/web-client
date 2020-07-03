@@ -4,37 +4,31 @@
     <hr/>
     <div class="personal">
       <el-form :model="registerForm" class="demo-ruleForm" label-width="80px">
-        <el-form-item prop="username" label="用户名">
-          <el-input v-model="registerForm.username" placeholder="用户名"></el-input>
+        <el-form-item prop="id" label="id">
+          <el-input readonly  placeholder="id" v-model="registerForm.id"></el-input>
+        </el-form-item>
+        <el-form-item prop="name" label="用户名">
+          <el-input v-model="registerForm.name" placeholder="用户名"></el-input>
         </el-form-item>
         <el-form-item prop="password" label="密码">
-          <el-input type="password" placeholder="密码" v-model="registerForm.password"></el-input>
+          <el-input readonly  placeholder="密码" v-model="registerForm.password"></el-input>
         </el-form-item>
-        <el-form-item label="性别">
-          <el-radio-group v-model="registerForm.sex">
-            <el-radio :label="0">女</el-radio>
-            <el-radio :label="1">男</el-radio>
-          </el-radio-group>
+        <el-form-item prop="sex" label="性别">
+          <el-input  readonly v-model="registerForm.sex" placeholder="性别"></el-input>
         </el-form-item>
-        <el-form-item prop="phoneNum" label="手机">
-          <el-input  placeholder="手机" v-model="registerForm.phoneNum" ></el-input>
+        <el-form-item prop="realname" label="真实姓名">
+          <el-input v-model="registerForm.realname" placeholder="用户名"></el-input>
+        </el-form-item>
+        <el-form-item prop="phone" label="手机">
+          <el-input  placeholder="手机" v-model="registerForm.phone" ></el-input>
+        </el-form-item>
+        <el-form-item prop="mobile" label="电话">
+          <el-input  placeholder="手机" v-model="registerForm.mobile" ></el-input>
         </el-form-item>
         <el-form-item prop="email" label="邮箱">
           <el-input v-model="registerForm.email" placeholder="邮箱"></el-input>
         </el-form-item>
-        <el-form-item prop="birth" label="生日">
-          <el-date-picker type="date" placeholder="选择日期" v-model="registerForm.birth" style="width: 100%;"></el-date-picker>
-        </el-form-item>
-        <el-form-item prop="location" label="地区">
-          <el-select v-model="registerForm.location" placeholder="地区" style="width:100%">
-            <el-option
-              v-for="item in cities"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
-        </el-form-item>
+
       </el-form>
     <div class="btn">
       <div @click="saveMsg()">保存</div>
@@ -46,20 +40,21 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { updateUserMsg, getUserOfId } from '../api/index'
+import { updateAdminInfo,getAdminInfo } from '../api/index'
 
 export default {
   name: 'info',
   data: function () {
     return {
       registerForm: { // 注册
-        username: '',
+        id:'',
+        name: '',
         password: '',
+        realname: '',
         sex: '',
-        phoneNum: '',
         email: '',
-        birth: '',
-        location: ''
+        phone: '',
+        mobile:'',
       },
 
     }
@@ -69,57 +64,56 @@ export default {
       'userId'
     ])
   },
-  created () {
 
-  },
   mounted () {
     this.getMsg(this.userId)
   },
   methods: {
     getMsg (id) {
-      getUserOfId(id)
+
+      let params = new URLSearchParams()
+      params.append('id', id)
+      getAdminInfo(params)
         .then(res => {
-          this.registerForm.username = res[0].username
-          this.registerForm.password = res[0].password
-          this.registerForm.sex = res[0].sex
-          this.registerForm.phoneNum = res[0].phoneNum
-          this.registerForm.email = res[0].email
-          this.registerForm.birth = res[0].birth
-          this.registerForm.location = res[0].location
-          this.registerForm.avator = res[0].avator
+          console.log("res")
+          console.log(res)
+          this.registerForm.id=id
+          this.registerForm.name = res.userName
+          this.registerForm.password = res.password
+          this.registerForm.realname = res.real_NAME
+          this.registerForm.sex = res.sex
+          this.registerForm.phone = res.phone
+          this.registerForm.email = res.email
+          this.registerForm.mobile = res.mobile
+
         })
         .catch(err => {
           console.log(err)
         })
     },
     goback () {
+      this.$router.push({path: `/Home`})
       this.$router.go(-1)
     },
     saveMsg () {
-      let d = new Date(this.registerForm.birth)
-      let datetime = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
+
       let params = new URLSearchParams()
       params.append('id', this.userId)
-      params.append('username', this.registerForm.username)
-      params.append('password', this.registerForm.password)
-      params.append('sex', this.registerForm.sex)
-      params.append('phone_num', this.registerForm.phoneNum)
+      params.append('name', this.registerForm.name)
+      params.append('realname', this.registerForm.realname)
+      params.append('phone', this.registerForm.phone)
       params.append('email', this.registerForm.email)
-      params.append('birth', datetime)
-      params.append('location', this.registerForm.location)
-      updateUserMsg(params)
+      params.append('mobile', this.registerForm.mobile)
+      updateAdminInfo(params)
         .then(res => {
           if (res.code === 1) {
             this.showError = false
             this.showSuccess = true
-            this.$store.commit('setUsername', this.registerForm.username)
             this.$notify.success({
               title: '编辑成功',
               showClose: true
             })
-            setTimeout(function () {
-              this.$router.go(-1)
-            }, 2000)
+
           } else {
             this.showSuccess = false
             this.showError = true
@@ -139,4 +133,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/css/info.scss';
+  .personal{
+    margin: 30px 10%;
+  }
 </style>

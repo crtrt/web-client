@@ -3,10 +3,6 @@ const navMsg = [{
   name: '首页',
   path: '/Home'
 },
-{
-  name: '管理员系统设置',
-  path: '/Setting'
-},
 
   {
   name: '老年人信息管理',
@@ -21,6 +17,14 @@ const navMsg = [{
   {
     name: '义工信息管理',
     path: '/Volunteer'
+  },
+  {
+    name: '管理员列表',
+    path: '/AdminList'
+  },
+  {
+    name: '个人设置',
+    path: '/Setting'
   },
 
 ]
