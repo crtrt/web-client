@@ -11,11 +11,7 @@ import Staff from '@/pages/Staff/Staff'
 import Volunteer from '@/pages/Volunteer/Volunteer'
 import OldInfoDetail from '@/pages/OldPeople/InfoDetail'
 import OldInfoEdit from '@/pages/OldPeople/InfoEdit'
-
-import StaffInfoDetail from '@/pages/Staff/InfoDetail'
 import StaffInfoEdit from '@/pages/Staff/InfoEdit'
-
-import VolunteerInfoDetail from '@/pages/Volunteer/InfoDetail'
 import VolunteerInfoEdit from '@/pages/Volunteer/InfoEdit'
 
 
@@ -105,14 +101,7 @@ export default new Router({
         keepAlive: true
       }
     },
-    {
-      path: '/Staff/InfoDetail/:id',
-      name: 'StaffInfoDetail',
-      component: StaffInfoDetail,
-      meta: {
-        keepAlive: true
-      }
-    },
+
     {
       path: '/Staff/InfoEdit/:id',
       name: 'StaffInfoEdit',
@@ -123,14 +112,6 @@ export default new Router({
     },
 
 
-    {
-      path: '/Volunteer/InfoDetail/:id',
-      name: 'VolunteerInfoDetail',
-      component: VolunteerInfoDetail,
-      meta: {
-        keepAlive: true
-      }
-    },
     {
       path: '/Volunteer/InfoEdit/:id',
       name: 'VolunteerInfoEdit',

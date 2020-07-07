@@ -52,11 +52,6 @@
             </el-table-column>
 
 
-            <el-table-column width="100" label="操作">
-                <template slot-scope="scope" >
-                    <el-button  size="mini"  type="success" @click="detail(scope.row.id)">详情</el-button>
-                </template>
-            </el-table-column>
         </el-table>
 
         <div style="display: flex; flex-direction: row-reverse;float:right; margin-right: 3%;padding-top: 10px">
@@ -207,10 +202,6 @@
                 this.$router.go(0)
             },
 
-            detail(id){
-                this.$router.push({path: `Staff/InfoDetail/${id}`})
-                this.$router.go(0)
-            }
         },
 
 

@@ -200,12 +200,12 @@
             },
             updateOld(id) {
                 this.$router.push({path: `OldPeople/InfoEdit/${id}`})
-                this.$router.go(0)
+
             },
 
             detail(id){
                 this.$router.push({path: `OldPeople/InfoDetail/${id}`})
-                this.$router.go(0)
+
             }
         },
 

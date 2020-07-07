@@ -1,18 +1,19 @@
 /* eslint-disable*/
 import axios from 'axios'
-import { get, post } from './http'
+import { get, post,Ppost } from './http'
 
 // =======================> 管理员 API
 // 登录
-export const loginIn = (params) => post(`login`, params)
+// export const loginIn = (params) => post(`login`, params)
+export const loginIn = (params) => Ppost(`/login`, params)
 // 注册
-export const SignUp = (params) => post(`register`, params)
+export const SignUp = (params) => post(`/register`, params)
 //管理员列表
-export const getAdminList = () => get('sysuser')
+export const getAdminList = () => get('/sysuser')
 //管理员信息
-export const getAdminInfo = (params) => post(`sysuser/detail`, params)
+export const getAdminInfo = (params) => post(`/sysuser/detail`, params)
 //修改信息
-export const updateAdminInfo = (params) => post(`sysuser/detail/update`, params)
+export const updateAdminInfo = (params) => post(`/sysuser/detail/update`, params)
 
 
 // =======================> 老人 API

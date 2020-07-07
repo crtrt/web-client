@@ -1,10 +1,12 @@
 /* eslint-disable */
 import axios from 'axios';
+import {mapGetters} from "vuex";
 axios.defaults.timeout = 5000;  //超时时间设置
 axios.defaults.withCredentials = true;  //true允许跨域
 //Content-Type 响应头
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+
 
 axios.defaults.baseURL = 'http://localhost:8888';
 
@@ -21,37 +23,37 @@ axios.interceptors.response.use(
   },
   // 服务器状态码不是2开头的的情况
   error => {
-    if (error.response.status) {
-      switch (error.response.status) {
-        // 401: 未登录
-        case 401:
-          router.replace({
-            path: '/',
-            query: {
-              redirect: router.currentRoute.fullPath
-            }
-          });
-          break;
-        case 403:
-          // console.log('管理员权限已修改请重新登录')
-          // 跳转登录页面，并将要浏览的页面fullPath传过去，登录成功后跳转需要访问的页面
-          setTimeout(() => {
-            router.replace({
-              path: '/',
-              query: {
-                redirect: router.currentRoute.fullPath
-              }
-            });
-          }, 1000);
-          break;
-
-        // 404请求不存在
-        case 404:
-          // console.log('请求页面飞到火星去了')
-          break;
-      }
+    // if (error.response.status) {
+      // switch (error.response.status) {
+      //   // 401: 未登录
+      //   case 401:
+      //     router.replace({
+      //       path: '/',
+      //       query: {
+      //         redirect: router.currentRoute.fullPath
+      //       }
+      //     });
+      //     break;
+      //   case 403:
+      //     // console.log('管理员权限已修改请重新登录')
+      //     // 跳转登录页面，并将要浏览的页面fullPath传过去，登录成功后跳转需要访问的页面
+      //     setTimeout(() => {
+      //       router.replace({
+      //         path: '/',
+      //         query: {
+      //           redirect: router.currentRoute.fullPath
+      //         }
+      //       });
+      //     }, 1000);
+      //     break;
+      //
+      //   // 404请求不存在
+      //   case 404:
+      //     // console.log('请求页面飞到火星去了')
+      //     break;
+      // }
       return Promise.reject(error.response);
-    }
+    // }
   });
 
 
@@ -96,3 +98,14 @@ export function post(url, data = {}) {
   })
 }
 
+export function Ppost(url, data = {}) {
+  let pythonURL = 'http://localhost:8888';
+  return new Promise((resolve, reject) => {
+    axios.post(pythonURL+url, data)
+        .then(response => {
+          resolve(response.data);
+        }, err => {
+          reject(err)
+        })
+  })
+}

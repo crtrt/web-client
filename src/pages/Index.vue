@@ -23,7 +23,7 @@
                     <el-form-item style="margin-top: 20px">
                         <el-button type="primary" @click="submitForm(loginForm)" class="submitBtn" round >登录</el-button>
 
-                        <el-button type="primary" @click="test()" class="submitBtn" round >测试</el-button>
+<!--                        <el-button type="primary" @click="test()" class="submitBtn" round >测试</el-button>-->
                     </el-form-item>
                 </el-form>
                 <el-button type="text" style="display:block;margin:0 auto;margin-top: -10px" @click="dialogRegister=true">注册</el-button>
@@ -184,7 +184,6 @@
                             _this.setUserMsg(res.id,loginForm.userName)
                             setTimeout(function () {
                                 _this.$router.push({path: '/Home'})
-                                _this.$router.go(0)
                             }, 2000)
                         } else {
                             _this.$message.error('用户名或密码错误')
@@ -218,10 +217,7 @@
                      console.log(res)
                      if (res.code === 1) {
                          _this.$message.success('注册成功')
-
-                       setTimeout(function () {
                          _this.dialogRegister=false
-                       }, 2000)
                      } else {
                          _this.$message.error('注册失败')
                      }

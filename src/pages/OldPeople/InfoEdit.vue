@@ -198,7 +198,7 @@
 <style lang="scss" scoped>
     @import '../../assets/css/info.scss';
     .personal{
-        margin: 50px;
         padding: 30px;
+        margin: 30px 10%;
     }
 </style>

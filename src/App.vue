@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" scrolling="no">
     <div v-if="$route.meta.keepAlive">
       <the-header />
       <router-view class="content"></router-view>
@@ -22,4 +22,3 @@ export default {
 <style  lang="scss" scoped>
   @import './assets/css/app.scss';
 </style>
-
