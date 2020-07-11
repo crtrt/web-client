@@ -19,8 +19,10 @@
     -webkit-animation: upShow 0.5s;	/* Safari 和 Chrome */
     -o-animation: upShow 0.5s;	/* Opera */
   }
+  .content {
+    margin-left: 190px;
+    width: calc(100% - 200px);
+  }
+
 }
 
-.content {
-  flex: 1;
-}

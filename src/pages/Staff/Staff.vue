@@ -4,7 +4,7 @@
                 :data="tableData"
                 :cell-style="{padding:'5px px 5px 0'}"
                 stripe
-                style="width: 100%;text-align: center;max-height: 99%;overflow-y: auto">
+                style="width: 100%;text-align: center;max-height: 99%;">
             <el-table-column
                     prop="id"
                     label="id">

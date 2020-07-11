@@ -28,8 +28,8 @@ export const updateOldInfo = (params) => post(`/oldperson/detail/update`, params
 export const deleteOldInfo = (params) => post(`/oldperson/delete`, params)
 //添加
 export const addOld = (params) => post(`/oldperson/insert`, params)
-
-
+//数据统计
+export const dataCount = (params) => post(`/event/count`, params)
 
 // =======================> 工作人员 API
 
@@ -57,3 +57,5 @@ export const updateVolunteerInfo = (params) => post(`/volunteer/detail/update`, 
 export const deleteVolunteerInfo = (params) => post(`/volunteer/delete`, params)
 //添加
 export const addVolunteer = (params) => post(`/volunteer/insert`, params)
+
+

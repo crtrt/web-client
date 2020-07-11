@@ -45,6 +45,21 @@
                 <el-form-item label="确认密码" prop="passwordConfirm" >
                     <el-input v-model="registerForm.passwordConfirm" placeholder="请再次输入密码确认" type="password" @keyup.enter.native="registerform('registerForm')"></el-input>
                 </el-form-item>
+<!--                <el-form-item label="头像">-->
+<!--                    <el-upload ref="upfile"-->
+<!--                               action="#"-->
+<!--                               :auto-upload="false"-->
+<!--                               :on-change="handleChange"-->
+<!--                               :show-file-list="false"-->
+<!--                               :limit="1"-->
+<!--                               accept="image/png,image/gif,image/jpg,image/jpeg"-->
+<!--                    >-->
+<!--                        <img v-if="imgUrl" :src="imgUrl" width="80" height="80"/>-->
+<!--                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
+<!--                    </el-upload>-->
+
+<!--                </el-form-item>-->
+
                 <el-form-item label="真实姓名" prop="realname" class="login-item" >
                     <el-input v-model="registerForm.realname" placeholder="请输入您的真实姓名" @keyup.enter.native="registerform('registerForm')"></el-input>
                 </el-form-item>
@@ -60,7 +75,7 @@
             </el-form>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogRegister = false">取 消</el-button>
-                <el-button type="primary" @click="register('registerForm')">注 册</el-button>
+                <el-button type="primary" @click="register(registerForm)">注 册</el-button>
              </span>
         </el-dialog>
 
@@ -107,7 +122,7 @@
                     ]
                 },
 
-
+                // imgUrl:'',
                 dialogRegister: false,
                 registerForm:{
                     name: '',
@@ -158,6 +173,15 @@
         },
 
         methods: {
+            // handleChange(file,fileList){
+            //     this.fileList = fileList;
+            //     console.log(file)
+            //     //生成本地图片的url，直接src显示,删除或移动后url就失效了
+            //     this.imgUrl = URL.createObjectURL(file.raw);
+            //
+            //
+            // },
+
             test(){
                 this.$router.push({path: '/Home'});
             },
@@ -182,6 +206,8 @@
                                 type: 'success'
                             })
                             _this.setUserMsg(res.id,loginForm.userName)
+
+
                             setTimeout(function () {
                                 _this.$router.push({path: '/Home'})
                             }, 2000)
@@ -198,10 +224,16 @@
             setUserMsg (id,name) {
                 this.$store.commit('setUserId', id)
                 this.$store.commit('setUsername',name )
+                // this.$store.commit('setAvator',avator )
             },
 
 
             register(registerForm){
+                // var face = this.fileList[0];
+                // console.log("face");
+                // console.log(face);
+                // console.log("this.imgUrl");
+                // console.log(this.imgUrl);
                  let _this = this
                  let params = new URLSearchParams()
                  params.append('name', registerForm.name)
@@ -211,6 +243,7 @@
                  params.append('email', registerForm.email)
                  params.append('phone', registerForm.phone)
                  params.append('mobile', registerForm.mobile)
+
                  // params.append('avator', '/img/user.jpg')
                  SignUp(params)
                    .then(res => {

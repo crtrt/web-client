@@ -1,19 +1,22 @@
 <template>
   <div class="the-header" >
-    <div class="header-logo" @click="goHome">
+    <div class="header-logo" >
       <i class="el-icon-camera"></i>
       <span>  {{Name}}</span>
     </div>
-<!--    <ul class="navbar" ref="change">-->
-<!--      <li  v-for="item in navMsg" :key="item.path" @click="goPage(item.path, item.name)">-->
-<!--        {{item.name}}-->
-<!--      </li>-->
-<!--    </ul>-->
-    <el-menu mode="horizontal" class="navbar" active-text-color="#30a4fc"  active-background-color="#50b9ce" >
-      <el-menu-item v-for="item in navMsg" :key="item.path" @click.native="goPage(item.path)">
-        <span slot="title">{{ item.name }}</span>
-      </el-menu-item>
-    </el-menu>
+
+     <div v-if="username != null && username !==''" style="margin-left: 1000px">
+      <el-dropdown  >
+          <span class="spanStyle">
+               欢迎你! 用户：
+<!--                <img v-if="avator" :src="avator" style="width: 50px;height:50px;"/>-->
+               {{username}}<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+        <el-dropdown-menu slot="dropdown" >
+          <el-dropdown-item @click.native="signout">退出登录</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
 
 
 
@@ -25,6 +28,7 @@
 
 
 import { navMsg } from '../assets/data/header'
+import {mapGetters} from "vuex";
 
 export default {
   name: 'the-header',
@@ -34,9 +38,18 @@ export default {
       navMsg: [], // 导航栏
     }
   },
-
+  computed: {
+    ...mapGetters([
+      'userId',
+      'username',
+      'avator',
+    ])
+  },
   created () {
     this.navMsg = navMsg
+      console.log("this.avator")
+
+      console.log(this.avator)
   },
   mounted () {
 
@@ -44,21 +57,16 @@ export default {
 
   methods: {
 
-    goHome () {
-      this.$router.push({path: '/'})
-    },
-    goPage (path) {
-      // document.querySelector('.menu').classList.remove('show')
 
-      // if (!this.loginIn && path === '/my-music') {
-      //   this.notify('请先登录', 'warning')
-      // } else {
-        this.$router.push({path: path})
-      // }
-    },
+      goPage(path) {
+          this.$router.push({path: path})
+      },
 
-
-
+      //退出登录
+      signout(){
+          this.$message('退出成功')
+          this.$router.push({path: '/'})
+      },
   }
 }
 </script>

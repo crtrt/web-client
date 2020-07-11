@@ -13,7 +13,7 @@ import OldInfoDetail from '@/pages/OldPeople/InfoDetail'
 import OldInfoEdit from '@/pages/OldPeople/InfoEdit'
 import StaffInfoEdit from '@/pages/Staff/InfoEdit'
 import VolunteerInfoEdit from '@/pages/Volunteer/InfoEdit'
-
+import Camera from '@/pages/Camera'
 
 Vue.use(Router)
 
@@ -120,8 +120,15 @@ export default new Router({
         keepAlive: true
       }
     },
+
+      {
+          path: '/Camera/:index',
+          name: 'Camera',
+          component: Camera,
+          meta: {
+              keepAlive: true
+          }
+      },
   ],
-  // scrollBehavior (to, from, savedPosition) {
-  //   return { x: 0, y: 0 }
-  // }
+
 })

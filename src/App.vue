@@ -2,6 +2,7 @@
   <div id="app" scrolling="no">
     <div v-if="$route.meta.keepAlive">
       <the-header />
+      <the-menu/>
       <router-view class="content"></router-view>
     </div>
     <router-view v-if="!$route.meta.keepAlive"></router-view>
@@ -10,11 +11,12 @@
 
 <script>
   import TheHeader from './components/TheHeader'
-
+  import TheMenu from './components/TheMenu'
 export default {
   name: 'App',
   components: {
     TheHeader,
+    TheMenu,
   }
 }
 </script>

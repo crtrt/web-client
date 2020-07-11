@@ -5,25 +5,35 @@ const navMsg = [{
 },
 
   {
-  name: '老年人信息管理',
+  name: '老人',
   path: '/OldManage'
 },
+  {
+    name: '摄像头',
+    sub:[
+      {
+        name:'房间摄像头',
+        path:'/Camera',
+        index:1
+      }
+    ]
+  },
 
   {
-    name: '工作人员信息管理',
+    name: '工作人员',
     path: '/Staff'
   },
 
   {
-    name: '义工信息管理',
+    name: '义工',
     path: '/Volunteer'
   },
   {
-    name: '管理员列表',
+    name: '管理员',
     path: '/AdminList'
   },
   {
-    name: '个人设置',
+    name: '设置',
     path: '/Setting'
   },
 

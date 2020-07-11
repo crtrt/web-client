@@ -62,7 +62,7 @@
 
                 <el-table-column width="100" label="操作">
                     <template slot-scope="scope" >
-                        <el-button  size="mini"  type="success" @click="detail(scope.row.id)">详情</el-button>
+                        <el-button  size="mini"  type="success" @click="detail(scope.row.username)">详情</el-button>
                     </template>
                 </el-table-column>
             </el-table>

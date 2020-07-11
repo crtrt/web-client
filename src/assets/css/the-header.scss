@@ -27,21 +27,7 @@
   }
 }
 
-/*nav*/
-.navbar {
-  height: $header-height;
-  white-space: nowrap;
-  li {
-    margin: $header-nav-margin;
-    padding: $header-nav-padding;
-    font-size: $font-size-header;
-    color: $color-grey;
-    text-align: center;
-    border-bottom: none;
-    box-sizing: border-box;
-    cursor: pointer;
-  }
-}
+
 
 
 /*用户*/
@@ -112,4 +98,11 @@
 .active {
   color: $theme-color !important;
   border-bottom: 5px solid $theme-color !important;
+}
+.spanStyle{
+  white-space: nowrap;  /*强制span不换行*/
+  display: inline-block;  /*将span当做块级元素对待*/
+  float:right;
+  color: $theme-color !important;
+  font-size:$font-size-header;
 }
