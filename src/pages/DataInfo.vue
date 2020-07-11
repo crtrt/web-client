@@ -42,7 +42,7 @@
 </template>
 
 <script>
-    import {dataInfo} from "@/api";
+    import {dataInfo,dataimginfo} from "@/api";
 
     export default {
         name: "DataInfo",
@@ -80,9 +80,33 @@
                     })
 
             },
-            getImg(img){
+            getImg(id){
+                let _this = this
+                let params = new URLSearchParams()
+                params.append('event_id', id)
+                dataimginfo(params)
+                    .then(res => {
+                        console.log(res)
+                        if (res.code === 1) {
+                            //window.location.href = res.image
+                            window.open(res.image, '_blank')
+                            _this.$message.success('截图返回成功')
+                            this.getInfo()
+                        } else {
+                            _this.$message.error('返回失败')
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+
+            },
+
+            getImg2(img){
+
                 console.log(img)
             }
+
         }
 
     }

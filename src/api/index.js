@@ -61,3 +61,4 @@ export const addVolunteer = (params) => post(`/volunteer/insert`, params)
 
 //数据统计
 export const dataInfo = () => get(`/event`)
+export const dataimginfo = (params) => post(`/event/imageurl`, params)
