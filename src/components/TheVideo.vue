@@ -1,20 +1,27 @@
 <template>
-    <video-player  class="camera"
-                   ref="videoPlayer"
-                   :playsinline="true"
-                   :options="playerOptions"
-                   @play="onPlayerPlay($event)"
-                   @pause="onPlayerPause($event)"
-                   @ended="onPlayerEnded($event)"
-    ></video-player>
+    <div>
+        <video-player  class="camera"
+                       ref="videoPlayer"
+                       :playsinline="true"
+                       :options="playerOptions"
+                       @play="onPlayerPlay($event)"
+                       @pause="onPlayerPause($event)"
+                       @ended="onPlayerEnded($event)"
+        ></video-player>
+    </div>
+
 </template>
 
 <script>
 
     export default {
-        name: "video",
+        name: "the-video",
         data(){
             return{
+                // 通过ref引用组件video-player
+                //
+                // this.$refs[`videoPlayer`][0].player.src(videoUrl)
+                // this.$refs[`videoPlayer`][0].player.load(videoUrl)
                 playerOptions:{
                     playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
                         autoplay: false, //如果true,浏览器准备好时开始回放。
@@ -45,5 +52,10 @@
 </script>
 
 <style scoped>
-
+    .camera{
+        top:80px;
+        margin-left: 200px;
+        width: 1200px;
+        height: 800px;
+    }
 </style>

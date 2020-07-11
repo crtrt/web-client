@@ -14,6 +14,7 @@ import OldInfoEdit from '@/pages/OldPeople/InfoEdit'
 import StaffInfoEdit from '@/pages/Staff/InfoEdit'
 import VolunteerInfoEdit from '@/pages/Volunteer/InfoEdit'
 import Camera from '@/pages/Camera'
+import DataInfo from '@/pages/DataInfo'
 
 Vue.use(Router)
 
@@ -129,6 +130,17 @@ export default new Router({
               keepAlive: true
           }
       },
+
+    {
+      path: '/DataInfo',
+      name: 'DataInfo',
+      component: DataInfo,
+      meta: {
+        keepAlive: true
+      }
+    },
+
+
   ],
 
 })

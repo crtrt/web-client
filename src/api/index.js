@@ -59,3 +59,5 @@ export const deleteVolunteerInfo = (params) => post(`/volunteer/delete`, params)
 export const addVolunteer = (params) => post(`/volunteer/insert`, params)
 
 
+//数据统计
+export const dataInfo = () => get(`/event`)

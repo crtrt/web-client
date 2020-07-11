@@ -3,7 +3,7 @@
         <div style="height: 200px ">
             <el-row :gutter="0"  class="el-row" type="flex">
                 <el-col :span="8" >
-                    <el-card :body-style="{ padding: '0px' }" style="width: 220px;">
+                    <el-card :body-style="{ padding: '0px' }" style="width: 300px;">
                         <img src='../../assets/image/icon/old.jpg' class="image" >
                         <div class="right" >
                             <span style="font-weight:bold">老人姓名:</span>
@@ -12,46 +12,27 @@
                     </el-card>
                 </el-col>
                 <el-col :span="8" >
-                    <el-card :body-style="{ padding: '0px' }" style="width: 220px;" @click="goImg">
+                    <el-card :body-style="{ padding: '0px' }" style="width: 300px;" @click="goImg">
                         <img src='../../assets/image/icon/smile.jpg' class="image" >
                         <div class="right" >
                             <span style="font-weight:bold">情感检测</span>
                             <p >微笑：{{countNum.count6}}次</p>
+                        </div>
+                    </el-card>
+                </el-col>
+
+                <el-col :span="8" >
+                    <el-card :body-style="{ padding: '0px' }" style="width: 300px;">
+                        <img src='../../assets/image/icon/angry.jpg' class="image" >
+                        <div class="right" >
+                            <span style="font-weight:bold">情感检测</span>
                             <p >愤怒：{{countNum.count5}}次</p>
                         </div>
                     </el-card>
                 </el-col>
 
                 <el-col :span="8" >
-                    <el-card :body-style="{ padding: '0px' }" style="width: 220px;">
-                        <img src='../../assets/image/icon/fall.jpg' class="image" >
-                        <div class="right" >
-                            <span style="font-weight:bold">摔倒检测</span>
-                            <p >摔倒：{{countNum.count3}}次</p>
-                        </div>
-                    </el-card>
-                </el-col>
-                <el-col :span="8" >
-                    <el-card :body-style="{ padding: '0px' }" style="width: 220px;">
-                        <img src='../../assets/image/icon/exit.jpg' class="image" >
-                        <div class="right" >
-                            <span style="font-weight:bold">禁止区入侵</span>
-                            <p >出现：{{countNum.count4}}次</p>
-                        </div>
-                    </el-card>
-                </el-col>
-                <el-col :span="8" >
-                    <el-card :body-style="{ padding: '0px' }" style="width: 220px;">
-                        <img src='../../assets/image/icon/exit.jpg' class="image" >
-                        <div class="right" >
-                            <span style="font-weight:bold">陌生人检测</span>
-                            <p >出现：{{countNum.count2}}次</p>
-                        </div>
-                    </el-card>
-                </el-col>
-
-                <el-col :span="8" >
-                    <el-card :body-style="{ padding: '0px' }" style="width: 220px;">
+                    <el-card :body-style="{ padding: '0px' }" style="width: 300px;">
                         <img src='../../assets/image/icon/vol.jpg' class="image" >
                         <div class="right" >
                             <span style="font-weight:bold">义工交互</span>
@@ -234,7 +215,7 @@
                     },
                     xAxis: {//x轴
                         type: 'category',
-                        data: ['微笑','愤怒', '摔倒', '陌生人', '义工','禁止区域'],//x轴的数据
+                        data: ['微笑','愤怒', '义工'],//x轴的数据
 
                         // splitArea: {show: true},//保留网格区域
                         axisLine: {//坐标线
@@ -278,7 +259,7 @@
                     },
                     series: [{
                         name: '次数',//每组数据的名字，与图例对应
-                        data: [num.count6, num.count5,num.count3, num.count2, num.count1,num.count4],//数据
+                        data: [num.count6, num.count5, num.count1],//数据
                         type: 'bar',//柱状图
                         itemStyle: {
                             normal: {
@@ -318,7 +299,7 @@
         padding-top:10px;
         float: left;
         width: 60%;
-        height: 120px;
+        height: 170px;
     }
 
 

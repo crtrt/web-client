@@ -30,6 +30,10 @@
                     <el-menu-item index="2-4">房间摄像头</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
+            <el-menu-item index="8">
+                <i class="el-icon-setting"></i>
+                <span slot="title">数据统计</span>
+            </el-menu-item>
 
             <el-menu-item index="3" >
                 <i class="el-icon-document"></i>
@@ -83,6 +87,8 @@
                     this.$router.push({path: '/AdminList'})
                 } else if (key === '6') {
                     this.$router.push({path: '/Setting'})
+                }else if (key === '8') {
+                    this.$router.push({path: '/DataInfo'})
                 }
             }
         }

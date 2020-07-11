@@ -1,16 +1,16 @@
 <template>
     <div>
-        <myvideo></myvideo>
+        <the-video />
     </div>
 </template>
 
 <script>
-    import myvideo from '../components/video'
+    import TheVideo from '../components/TheVideo'
 
     export default {
         name: "Camera",
         components: {
-            myvideo,
+            TheVideo,
 
         },
         data(){
@@ -20,6 +20,7 @@
         },
         mounted() {
             this.index = this.$route.params.index // 获得赋值
+            console.log('this.index'+this.index)
         },
     }
 </script>
