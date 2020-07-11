@@ -62,8 +62,6 @@
                 console.log(key, keyPath);
             },
             handleSelect(key, keyPath) {
-                console.log('key')
-                console.log(key)
                 console.log(key, keyPath);
                 if (key === '1') {
                     this.$router.push({path: '/Home'})

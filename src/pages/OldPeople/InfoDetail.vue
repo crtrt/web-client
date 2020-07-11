@@ -63,7 +63,7 @@
 
         </div>
         <div style="margin-top: 20px;margin-bottom: 50px" >
-<!--            <iframe class="camera" src="http://127.0.0.1:5001" scrolling="no" ></iframe>-->
+            <!--            <iframe class="camera" src="http://127.0.0.1:5001" scrolling="no" ></iframe>-->
 
             <el-row :gutter="0"  class="el-row" type="flex">
                 <el-col :span="8" >
@@ -110,9 +110,13 @@
             this.old_name = this.$route.params.id // 获得赋值
             this.getDetailInfo()//获取数据
 
-            window.setInterval(() => {
+            const timer = setInterval(() =>{
                 setTimeout( this.getDetailInfo, 0)
             }, 10000);
+            // 通过$once来监听定时器，在beforeDestroy钩子可以被清除。
+            this.$once('hook:beforeDestroy', () => {
+                clearInterval(timer);
+            })
 
 
         },
@@ -296,6 +300,7 @@
 
 
             },
+
             //这里写弹出内容
             goImg(){
 
