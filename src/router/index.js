@@ -123,7 +123,7 @@ export default new Router({
     },
 
       {
-          path: '/Camera/:index',
+          path: '/Camera',
           name: 'Camera',
           component: Camera,
           meta: {

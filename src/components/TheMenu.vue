@@ -12,26 +12,15 @@
                 <span slot="title">首页</span>
             </el-menu-item>
             <el-menu-item index="7">
-                <i class="el-icon-menu"></i>
+                <i class="el-icon-user-solid"></i>
                 <span slot="title">老人</span>
             </el-menu-item>
-            <el-submenu index="2">
-                <template slot="title">
+            <el-menu-item index="2">
                     <i class="el-icon-location"></i>
                     <span>摄像头</span>
-                </template>
-                <el-menu-item-group>
-                    <template slot="title">老人</template>
-                    <el-menu-item index="2-1">房间摄像头</el-menu-item>
-                    <el-menu-item index="2-2">走廊摄像头</el-menu-item>
-                </el-menu-item-group>
-                <el-menu-item-group title="安全">
-                    <el-menu-item index="2-3">院子摄像头</el-menu-item>
-                    <el-menu-item index="2-4">房间摄像头</el-menu-item>
-                </el-menu-item-group>
-            </el-submenu>
+            </el-menu-item>
             <el-menu-item index="8">
-                <i class="el-icon-setting"></i>
+                <i class="el-icon-s-data"></i>
                 <span slot="title">数据统计</span>
             </el-menu-item>
 
@@ -40,7 +29,7 @@
                 <span slot="title">工作人员</span>
             </el-menu-item>
             <el-menu-item index="4">
-                <i class="el-icon-setting"></i>
+                <i class="el-icon-share"></i>
                 <span slot="title">义工</span>
             </el-menu-item>
             <el-menu-item index="5">
@@ -71,14 +60,8 @@
                     this.$router.push({path: '/Home'})
                 } else if (key === '7') {
                     this.$router.push({path: '/OldManage'})
-                } else if (key === '2-1') {
-                    this.$router.push({path: `/Camera/1`})
-                } else if (key === '2-2') {
-                    this.$router.push({path: `/Camera/2`})
-                } else if (key === '2-3') {
-                    this.$router.push({path: `/Camera/3`})
-                } else if (key === '2-4') {
-                    this.$router.push({path: `/Camera/4`})
+                } else if (key === '2') {
+                    this.$router.push({path: `/Camera`})
                 } else if (key === '3') {
                     this.$router.push({path: '/Staff'})
                 } else if (key === '4') {

@@ -1,7 +1,7 @@
 <template>
   <div class="info">
-    <p class="title">编辑个人资料</p>
-    <hr/>
+<!--    <p class="title">编辑个人资料</p>-->
+<!--    <hr/>-->
     <div class="personal">
       <el-form :model="registerForm" class="demo-ruleForm" label-width="80px">
         <el-form-item prop="id" label="id">

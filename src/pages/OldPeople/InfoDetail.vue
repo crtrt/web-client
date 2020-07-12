@@ -78,7 +78,6 @@
 
         data() {
             return {
-
                 chartPie: null,
                 chartBar:null,
                 old_name:'',
@@ -237,7 +236,7 @@
                             show: false//去掉分割线
                         },
                     },
-                    backgroundColor: '#fff',//图得背景色
+                    backgroundColor: '#ffffff',//图得背景色
                     yAxis: {
                         name: '单位：次',//轴的名字，默认位置在y轴上方显示
                         // max: 100,//最大刻度
@@ -260,20 +259,57 @@
                     series: [{
                         name: '次数',//每组数据的名字，与图例对应
                         data: [num.count6, num.count5, num.count1],//数据
-                        type: 'bar',//柱状图
+                        // type: 'bar',//柱状图
+                        type: 'pictorialBar',
+                        barCategoryGap: '0%',
+                        symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
+                        label: {
+                            show: true,
+                            position: 'top',
+                            distance: 15,
+                            color: '#DB5E6A',
+                            fontWeight: 'bolder',
+                            fontSize: 20,
+                        },
                         itemStyle: {
                             normal: {
-                                color: '#2aa3ef',//设置柱子颜色
-                                label: {
-                                    show: true,//柱子上显示值
-                                    position: 'top',//值在柱子上方显示
-                                    textStyle: {
-                                        color: '#2aa3ef'//值得颜色
-                                    }
+                                color: {
+                                    type: 'linear',
+                                    x: 0,
+                                    y: 0,
+                                    x2: 0,
+                                    y2: 1,
+                                    colorStops: [{
+                                        offset: 0,
+                                        color: 'rgba(232, 94, 106, .8)' //  0%  处的颜色
+                                    },
+                                        {
+                                            offset: 1,
+                                            color: 'rgba(232, 94, 106, .1)' //  100%  处的颜色
+                                        }
+                                    ],
+                                    global: false //  缺省为  false
                                 }
+                            },
+                            emphasis: {
+                                opacity: 1
                             }
                         },
-                        barWidth: 30//设置柱子宽度，单位为px
+
+                        z: 10
+                        // itemStyle: {
+                        //     normal: {
+                        //         color: '#2aa3ef',//设置柱子颜色
+                        //         label: {
+                        //             show: true,//柱子上显示值
+                        //             position: 'top',//值在柱子上方显示
+                        //             textStyle: {
+                        //                 color: '#2aa3ef'//值得颜色
+                        //             }
+                        //         }
+                        //     }
+                        // },
+                        // barWidth: 30//设置柱子宽度，单位为px
                     }],
                 };
                 myChart.setOption(option);//设置option
