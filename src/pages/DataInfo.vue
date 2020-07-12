@@ -57,7 +57,7 @@
 
             const timer = setInterval(() =>{
                 setTimeout( this.getDetailInfo, 0)
-            }, 10000);
+            }, 3000);
             // 通过$once来监听定时器，在beforeDestroy钩子可以被清除。
             this.$once('hook:beforeDestroy', () => {
                 clearInterval(timer);

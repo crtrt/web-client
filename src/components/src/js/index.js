@@ -38,6 +38,8 @@ export default {
             default: true
         },
         src: {//rtmp://58.200.131.2:1935/livetv/hunantv
+            //rtmp://39.100.106.24:1935/stream/fall
+            //rtmp://39.100.106.24:1935/stream/camera
             type: String,
             default: 'rtmp://39.100.106.24:1935/stream/camera'
         },

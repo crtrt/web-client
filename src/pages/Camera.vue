@@ -1,11 +1,22 @@
 <template>
     <div>
+
+        <el-button    type="warning"
+                      @click="handleSetSrc('rtmp://39.100.106.24:1935/stream/camera')">摄像头</el-button>
+        <el-button   type="primary"
+                     @click="handleSetSrc('rtmp://39.100.106.24:1935/stream/fall')">摔倒监控</el-button>
+        <el-button   type="success"
+                     @click="handleSetSrc(' rtmp://39.100.106.24:1935/stream/stranger-expression')">陌生人监控</el-button>
+
+
+        <p style="float:right;color:#b1b3b4">{{src}}</p>
         <vueRtmpPlayer ref="rtmpPlayer" class="vjs-custom-skin"
                        @play="onPlayerPlay($event)" @pause="onPlayerPause($event)"
                        @loadeddata="onPlayerLoadeddata($event)" @waiting="onPlayerWaiting($event)"
                        @playing="onPlayerPlaying($event)" @timeupdate="onPlayerTimeupdate($event)"
                        @ready="playerReadied" @statechanged="playerStateChanged($event)">
         </vueRtmpPlayer>
+
 <!--        <el-button  size="mini"  type="warning" @click="handlePlay">播放</el-button>-->
 <!--        <el-button  size="mini"  type="warning" @click="handlePause">暂停</el-button>-->
 
@@ -34,9 +45,10 @@
             // handlePause() {
             //     this.$refs.rtmpPlayer.pause();
             // },
-            // handleSetSrc() {
-            //     this.$refs.rtmpPlayer.setSrc(this.src);
-            // },
+            handleSetSrc(src) {
+                this.$refs.rtmpPlayer.setSrc(src);
+                this.src=src
+            },
             // handleClose(){
             //     this.$refs.rtmpPlayer.reset();
             // },
